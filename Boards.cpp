@@ -20,4 +20,10 @@ Boards::Boards(){
 }
 
 Boards::~Boards(){
+  /*Deletes the allocated memory for the board.*/
+  for(int d = 0 ; d < rows ; d++) {
+    delete[] myBoard[d];
+  }
+  delete[] myBoard;
+  myBoard = nullptr; //Repoints to null, for safety.
 }
