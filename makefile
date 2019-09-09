@@ -1,18 +1,17 @@
 ﻿program: main.o Executive.o Players.o Boards.o
 	g++ -std=c++11 -g -Wall main.o Executive.o Players.o Boards.o -o program
 
-main.o: main.cpp Executive.cpp 
-	g++ -std=c++11 -g -Wall -c  main.cpp 
+main.o: main.cpp Executive.h
+	g++ -std=c++11 -g -Wall -c  main.cpp
 
-Executive.o: Executive.h Executive.cpp 
-	g++ -std=c++11 -g -Wall -c  Executive.cpp 
+Executive.o: Executive.h Executive.cpp Players.h
+	g++ -std=c++11 -g -Wall -c  Executive.cpp
 
-Players.o: Players.h 
-	g++ -std=c++11 -g -Wall -c  Players.cpp 
+Players.o: Players.h Players.cpp Boards.h
+	g++ -std=c++11 -g -Wall -c  Players.cpp
 
-Boards.o: Boards.h  
+Boards.o: Boards.h Boards.cpp
 	g++ -std=c++11 -g -Wall -c  Boards.cpp
 
-
-clean: 
+clean:
 	rm *.o program
