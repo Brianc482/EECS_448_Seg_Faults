@@ -1,4 +1,5 @@
 #include "Boards.h"
+using namespace std;
 
 Boards::Boards(){
   /*Default values put into rows and columns.*/
@@ -8,7 +9,7 @@ Boards::Boards(){
     characters on the heap.*/
   myBoard = new char*[rows];
   for(int i = 0 ; i < rows ; i++) {
-    myBoard = new char[cols];
+    myBoard[i] = new char[cols];
   }
   /*Fill the default board with "water".*/
   for(int a = 0 ; a < rows ; a++) {
@@ -26,4 +27,18 @@ Boards::~Boards(){
   }
   delete[] myBoard;
   myBoard = nullptr; //Repoints to null, for safety.
+}
+
+void Boards::displayBoard(bool personal) const{
+  char temp = '~';
+  for(int x = 0 ; x < rows ; x++) {
+    for(int y = 0 ; y < cols ; y++) {
+      temp = myBoard[x][y];
+      if((personal == false) && (temp == 'S')) {
+        cout<<'~';
+      } else {
+        cout<<temp;
+      }
+    }
+  }
 }

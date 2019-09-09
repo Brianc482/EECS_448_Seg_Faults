@@ -5,6 +5,7 @@ class Players{
 private:
 
 public:
-
+  Players();
+  ~Players();
 };
 #endif
