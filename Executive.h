@@ -26,5 +26,8 @@ class Executive{
         **/
         void run();
         void checkShot();
+        void getNumberOfShips();
+        void getRow();
+        void getColumn();
 };
 #endif
