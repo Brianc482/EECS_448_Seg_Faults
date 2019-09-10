@@ -5,7 +5,9 @@
 #include "Boards.h"
 
 Executive::Executive(){
-
+ row = 0;
+ column = ' ';
+ newBoard = new Boards();
 }
 Executive::~Executive(){
 }
@@ -58,13 +60,22 @@ void Executive::run(){
    std::cout << "\nEnter the row number: ";
    std::cin >> row;
  }
- 
+ checkShot();
+}
  //Checks if the user entered values are on the board
  //Returns true is '~' water is found
+void Executive::checkShot(){
  if(newBoard->isValid(column, row)){
    std::cout << "Is valid..\n";
+   if(newBoard->isHit(column, row)){
+     std::cout << "HIT!!!!\n";
+   }
+   else{
+     std::cout << "MISS!!!!\n";
+   }
  }
  else{
    std::cout << "Invalid location\n";
  }
 }
+
