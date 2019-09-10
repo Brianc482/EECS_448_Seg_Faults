@@ -1,8 +1,11 @@
 #ifndef EXECUTIVE_H
 #define EXECUTIVE_H
+#include "Boards.h"
 class Executive{
     private:
-        
+        int row;
+        char column;
+        Boards* newBoard;
     public:
         /**
         *@pre none
@@ -22,5 +25,6 @@ class Executive{
         *@post returns nothing
         **/
         void run();
+        void checkShot();
 };
 #endif
