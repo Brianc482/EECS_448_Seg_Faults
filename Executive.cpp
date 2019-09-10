@@ -5,9 +5,12 @@
 #include "Boards.h"
 
 Executive::Executive(){
-
+	playerOne = new Players();
+	playerTwo = new Players();
 }
 Executive::~Executive(){
+	delete playerOne;
+	delete playerTwo;
 }
 void Executive::run(){
  Boards* newBoard = new Boards();

@@ -1,8 +1,11 @@
 #ifndef EXECUTIVE_H
 #define EXECUTIVE_H
+
+#include "Players.h"
+
 class Executive{
     private:
-        
+        Players* playerOne, playerTwo;
     public:
         /**
         *@pre none
