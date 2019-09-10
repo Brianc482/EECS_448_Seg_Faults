@@ -10,6 +10,7 @@ Executive::Executive(){
 }
 Executive::~Executive(){
 
+
 }
 void Executive::run(){
  getNumberOfShips();
