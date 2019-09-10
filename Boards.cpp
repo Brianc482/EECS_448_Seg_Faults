@@ -15,32 +15,37 @@ Boards::Boards(){
     }
   }
 }
-bool Boards::isValid(char column, int row){
-  int columnNumber;
-  if(column == 'A'){
+//Converts the letter for column into a number
+int Boards::charConvert(char temp){
+  int columnNumber = 0;
+  if(temp == 'A' || temp == 'a'){
     columnNumber = 0;
   }
-  if(column == 'B'){
+  if(temp == 'B' || temp == 'b'){
     columnNumber = 1;
   }
-  if(column == 'C'){
+  if(temp == 'C' || temp == 'c'){
     columnNumber = 2;
   }
-  if(column == 'D'){
+  if(temp == 'D' || temp == 'd'){
     columnNumber = 3;
   }
-  if(column == 'E'){
+  if(temp == 'E' || temp == 'e'){
     columnNumber = 4;
   }
-  if(column == 'F'){
+  if(temp == 'F' || temp == 'f'){
     columnNumber = 5;
   }
-  if(column == 'G'){
+  if(temp == 'G' || temp == 'g'){
     columnNumber = 6;
   }
-  if(column == 'H'){
+  if(temp == 'H' || temp == 'h'){
     columnNumber = 7;
   }
+  return columnNumber;
+}
+bool Boards::isValid(char column, int row){
+  int columnNumber = charConver(column);  
   if((columnNumber <= 7 && columnNumber >= 0) && (row <= 7 && row >= 0)){
     if(defensiveBoard[columnNumber][row] == '~'){
       return true;
@@ -59,13 +64,14 @@ Boards::~Boards(){
   delete offensiveBoard;
   delete defensiveBoard;
 }
+//Displays both the offensive and defensive boards for a player
 void Boards::displayBoth() const{
   cout << "\nOffensive board: \n";
   displayOffensiveBoard();
   cout << "\nDefensive board: \n";
   displayDefensiveBoard();
 }
-
+//Displays the current offensive board
 void Boards::displayOffensiveBoard() const{
   cout << "  A B C D E F G H\n";
   for(int i = 0; i < rows; i++) {
@@ -76,6 +82,7 @@ void Boards::displayOffensiveBoard() const{
     cout << "\n";
   }
 }
+//Displays the current defensive board
 void Boards::displayDefensiveBoard() const{
   cout << "  A B C D E F G H\n";
   for(int i = 0; i < rows; i++) {
@@ -86,9 +93,14 @@ void Boards::displayDefensiveBoard() const{
     cout << "\n";
   }
 }
-
+//Checks the location in the array for 'S' and returns true
+//If that position is '~', 'M', or 'H' returns false
 bool Boards::isHit(char column, int row){
-	/* TODO 
-		Create isHit */
-	return false;
+ int columnNumber = charConvert(column);
+ if((columnNumber <= 7 && columnNumber >= 0) && (row <= 7 && row >= 0)){
+  if(defensiveBoard[columnNumber][row] == 'S'){
+    return true;
+  }
+ }
+ return false;
 }
