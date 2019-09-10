@@ -10,9 +10,9 @@
 
 class Boards{
 private:
-	char** myBoard;
+	char offensiveBoard[8][8];
+	char defensiveBoard[8][8];
 	int rows, cols;
-
 public:
 /****************************************
 		CONSTRUCTOR/DECONSTRUCTOR
@@ -26,8 +26,9 @@ public:
 	 * @post Board is displayed on screen.
 	 * @note Personal is for confidentiality if viewing the other's board.
 	 */
-	void displayBoard(bool personal) const;
-
-
+	void displayOffensiveBoard() const;
+	void displayDefensiveBoard() const;
+	void displayBoth() const;
+	bool isValid(char, int);
 };
 #endif
