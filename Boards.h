@@ -31,5 +31,6 @@ public:
 	void displayBoth() const;
 	bool isValid(char, int);
 	bool isHit(char, int);
+	int charConvert(char);
 };
 #endif
