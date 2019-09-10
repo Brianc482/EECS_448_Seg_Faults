@@ -2,7 +2,6 @@
 #include <fstream>
 #include <stdexcept>
 #include "Executive.h"
-#include "Boards.h"
 
 Executive::Executive(){
  row = 0;
