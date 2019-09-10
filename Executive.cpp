@@ -14,11 +14,14 @@ void Executive::run(){
  newBoard->displayOffensiveBoard();
  newBoard->displayOffensiveBoard();
  newBoard->displayBoth();
-
+ 
+ //Sets the row and column if the input is valid
  int row = 0;
  char column = ' ';
  std::cout << "\nEnter the column letter: ";
  std::cin >> column;
+ 
+ //If the column value is not between A-H prompt for new input
  while(column < 65 || column > 72){
    if(column < 65 || column > 72){
    std::cout << "Invalid selection, try again\n";
@@ -29,8 +32,11 @@ void Executive::run(){
     std::cin >> column;
   }
  }
+ 
  std::cout << "\nEnter the row number: ";
  std::cin >> row;
+
+ //If the row value is not between A-H prompt for new input
  while (std::cin.fail() || row > 7 || row < 0){
    std::cin.clear();
    std::cin.ignore(INT8_MAX, '\n');
@@ -38,6 +44,9 @@ void Executive::run(){
    std::cout << "\nEnter the row number: ";
    std::cin >> row;
  }
+ 
+ //Checks if the user entered values are on the board
+ //Returns true is '~' water is found
  if(newBoard->isValid(column, row)){
    std::cout << "Is valid..\n";
  }
