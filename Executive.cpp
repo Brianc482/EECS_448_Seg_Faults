@@ -10,6 +10,20 @@ Executive::Executive(){
 Executive::~Executive(){
 }
 void Executive::run(){
+ //Prompts the user for the number of ships to be used during the game
+ int numberOfShips = 0;
+ std::cout << "Enter the number of ships(1-5): ";
+ std::cin >> numberOfShips;
+ //If the value entered is invalid, prompts the user for a new value 
+ //until a valid value is entered
+ while (std::cin.fail() || numberOfShips > 5 || numberOfShips < 1){
+   std::cin.clear();
+   std::cin.ignore(INT8_MAX, '\n');
+   std::cout << "Invalid number of ships, try again.\n";
+   std::cout << "\nEnter the number of ships: ";
+   std::cin >> numberOfShips;
+ }
+ 
  Boards* newBoard = new Boards();
  newBoard->displayOffensiveBoard();
  newBoard->displayOffensiveBoard();
