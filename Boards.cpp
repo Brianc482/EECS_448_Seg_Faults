@@ -86,23 +86,4 @@ void Boards::displayDefensiveBoard() const{
     cout << "\n";
   }
 }
- d++) {
-    delete[] myBoard[d];
-  }
-  delete[] myBoard;
-  myBoard = nullptr; //Repoints to null, for safety.
-}
 
-void Boards::displayBoard(bool personal) const{
-  char temp = '~';
-  for(int x = 0 ; x < rows ; x++) {
-    for(int y = 0 ; y < cols ; y++) {
-      temp = myBoard[x][y];
-      if((personal == false) && (temp == 'S')) {
-        cout<<'~';
-      } else {
-        cout<<temp;
-      }
-    }
-  }
-}
