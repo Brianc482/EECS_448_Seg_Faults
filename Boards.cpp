@@ -87,3 +87,8 @@ void Boards::displayDefensiveBoard() const{
   }
 }
 
+bool Boards::isHit(char column, int row){
+	/* TODO 
+		Create isHit */
+	return false;
+}
