@@ -6,6 +6,7 @@ class Executive{
         int row;
         char column;
         Boards* newBoard;
+		int numberOfShips;
     public:
         /**
         *@pre none

@@ -30,5 +30,7 @@ public:
 	void displayDefensiveBoard() const;
 	void displayBoth() const;
 	bool isValid(char, int);
+	bool isHit(char, int);
+	int charConvert(char);
 };
 #endif
