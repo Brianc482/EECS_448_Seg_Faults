@@ -45,7 +45,7 @@ int Boards::charConvert(char temp){
   return columnNumber;
 }
 bool Boards::isValid(char column, int row){
-  int columnNumber = charConver(column);  
+  int columnNumber = charConvert(column);
   if((columnNumber <= 7 && columnNumber >= 0) && (row <= 7 && row >= 0)){
     if(defensiveBoard[columnNumber][row] == '~'){
       return true;
@@ -103,4 +103,22 @@ bool Boards::isHit(char column, int row){
   }
  }
  return false;
+}
+//Displays the board, but hides the ships, so you can't cheat.
+//Same basic code as the other displays.
+void Boards::displayHidden() const {
+  char temp = '~';
+  cout << "  A B C D E F G H\n";
+  for(int i = 0; i < rows; i++) {
+    cout << i << " ";
+    for(int j = 0; j < 8; j++) {
+      temp = offensiveBoard[i][j];
+      if(temp == 'S') {
+        cout << '~' << " ";
+      } else {
+        cout <<  offensiveBoard[i][j] << " ";
+      }
+    }
+    cout << "\n";
+  }
 }
