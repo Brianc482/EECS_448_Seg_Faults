@@ -10,8 +10,7 @@ Boards::Boards(){
     characters on the heap.*/
   for(int i = 0 ; i < rows ; i++) {
     for(int j = 0; j < cols; j++){
-      offensiveBoard[i][j] = '~';
-      defensiveBoard[i][j] = '~';
+      myBoard[i][j] = '~';
     }
   }
 }
@@ -44,6 +43,34 @@ int Boards::charConvert(char temp){
   }
   return columnNumber;
 }
+char Boards::intConvert(int temp){
+  char column = 'A';
+  if(temp == 0) {
+    column = 'A';
+  }
+  if(temp == 1) {
+    column = 'B';
+  }
+  if(temp == 2) {
+    column = 'C';
+  }
+  if(temp == 3) {
+    column = 'D';
+  }
+  if(temp == 4) {
+    column = 'E';
+  }
+  if(temp == 5) {
+    column = 'F';
+  }
+  if(temp == 6) {
+    column = 'G';
+  }
+  if(temp == 7) {
+    column = 'H';
+  }
+  return column;
+}
 bool Boards::isValid(char column, int row){
   int columnNumber = charConvert(column);
   if((columnNumber <= 7 && columnNumber >= 0) && (row <= 7 && row >= 0)){
@@ -55,38 +82,18 @@ Boards::~Boards(){
   //Deletes the allocated memory for the board.
   for(int i = 0 ; i < rows ; i++) {
     for(int j = 0 ; j < rows ; j++) {
-      offensiveBoard[i][j] = ' ';
-      defensiveBoard[i][j] = ' ';
+      myBoard[i][j] = ' ';
     }
   }
-  delete offensiveBoard;
-  delete defensiveBoard;
+  delete myBoard;
 }
-//Displays both the offensive and defensive boards for a player
-void Boards::displayBoth() const{
-  cout << "\nOffensive board: \n";
-  displayOffensiveBoard();
-  cout << "\nDefensive board: \n";
-  displayDefensiveBoard();
-}
-//Displays the current offensive board
-void Boards::displayOffensiveBoard() const{
+//Displays the board
+void Boards::displayBoard() const{
   cout << "  A B C D E F G H\n";
   for(int i = 0; i < rows; i++) {
     cout << i << " ";
     for(int j = 0; j < 8; j++) {
-      cout <<  offensiveBoard[i][j] << " ";
-    }
-    cout << "\n";
-  }
-}
-//Displays the current defensive board
-void Boards::displayDefensiveBoard() const{
-  cout << "  A B C D E F G H\n";
-  for(int i = 0; i < rows; i++) {
-    cout << i << " ";
-    for(int j = 0; j < 8; j++) {
-      cout <<  defensiveBoard[i][j] << " ";
+      cout <<  myBoard[i][j] << " ";
     }
     cout << "\n";
   }
@@ -96,13 +103,13 @@ void Boards::displayDefensiveBoard() const{
 bool Boards::isHit(char column, int row){
  int columnNumber = charConvert(column);
  if((columnNumber <= 7 && columnNumber >= 0) && (row <= 7 && row >= 0)){
-  if(defensiveBoard[row][columnNumber] == 'S'){
-    defensiveBoard[row][columnNumber] = 'H';
+  if(myBoard[row][columnNumber] == 'S'){
+    myBoard[row][columnNumber] = 'H';
     return true;
-  } else if(defensiveBoard[row][columnNumber] == 'H'){
+  } else if(myBoard[row][columnNumber] == 'H'){
     cout << "You've already guessed there, you forfeit your turn!\n";
   } else {
-    defensiveBoard[row][columnNumber] = 'M';
+    myBoard[row][columnNumber] = 'M';
   }
  }
  return false;
@@ -115,13 +122,93 @@ void Boards::displayHidden() const {
   for(int i = 0; i < rows; i++) {
     cout << i << " ";
     for(int j = 0; j < 8; j++) {
-      temp = offensiveBoard[i][j];
+      temp = myBoard[i][j];
       if(temp == 'S') {
         cout << '~' << " ";
       } else {
-        cout <<  offensiveBoard[i][j] << " ";
+        cout <<  myBoard[i][j] << " ";
       }
     }
     cout << "\n";
   }
+}
+
+bool Boards::isPlaceable(char col, int row) {
+  char temp;
+  int column = charConvert(col);
+  if(isValid(col, row)) {
+    temp = myBoard[row][column];
+    if(temp == '~') {
+      return true;
+    } else {
+      return false;
+    }
+  } else {
+    return false;
+  }
+}
+
+bool Boards::isPlaceableRange(char col1, char col2, int row1, int row2) {
+  int column1 = charConvert(col1);
+  int column2 = charConvert(col2);
+  //same column, thus vertical
+  if(column1 == column2) {
+    for(int i = min(row1,row2) ; i <= max(row1,row2) ; i++){
+      if(!isPlaceable(col1,i)){
+        return false;
+      }
+    }
+    return true;
+  //same row, thus horizontal
+  } else if(row1 == row2) {
+    for(int i = min(column1,column2) ; i <= max(column1,column2) ; i++){
+      if(!isPlaceable(intConvert(i),row1)){
+        return false;
+      }
+    }
+    return true;
+  //if it's not horizontal or vertical, it can't be placed.
+  } else {
+    return false;
+  }
+}
+
+void Boards::shipCheck(int row1, int row2, char col1, char col2, int size) {
+  int col1Num = charConvert(col1);
+  int col2Num = charConvert(col2);
+  //Checks the size of the ship, and places accordingly.
+  //1 ship
+  if(size == 1 && isValid(col1, row1)) {
+    myBoard[row1][col1Num] = 'S';
+  } else {
+    //Both end points are valid
+    if(isValid(col1, row1) && isValid(col2, row2)){
+      //if the range of values is placeable upon
+      //checks for diagonals here
+      if(isPlaceableRange(col1, col2, row1, row2)){
+        //Vertical Placement, if the size lines up.
+        if(col1Num == col2Num && (abs(row2 - row1)+1 == size)) {
+          for(int a = min(row2,row1) ; a <= max(row2,row1) ; a++) {
+            placeShip(col1,a);
+          }
+        //Horizontal Placement, if the sizes line up.
+        } else if(row1 == row2 && (abs(col2Num - col1Num)+1 == size)) {
+          for(int a = min(col1,col2) ; a <= max(col1,col2) ; a++) {
+            placeShip(intConvert(a),row1);
+          }
+        } else {
+          cout<<"Size does not match given values.\n";
+        }
+      } else {
+        cout<<"Ship not in a placeable range.\n";
+      }
+    } else {
+      cout<<"One or both locations invalid.\n";
+    }
+  }
+}
+
+void Boards::placeShip(int row, char col) {
+  int column = charConvert(col);
+  myBoard[row][column] = 'S';
 }
