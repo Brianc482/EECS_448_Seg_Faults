@@ -47,9 +47,7 @@ int Boards::charConvert(char temp){
 bool Boards::isValid(char column, int row){
   int columnNumber = charConvert(column);
   if((columnNumber <= 7 && columnNumber >= 0) && (row <= 7 && row >= 0)){
-    if(defensiveBoard[columnNumber][row] == '~'){
       return true;
-    }
   }
   return false;
 }

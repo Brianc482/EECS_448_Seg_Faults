@@ -18,10 +18,11 @@ void Executive::run(){
  getRow();
 
  newBoard->displayOffensiveBoard();
- newBoard->displayOffensiveBoard();
+ newBoard->displayDefensiveBoard();
  newBoard->displayBoth();
 
  checkShot();
+ newBoard->displayDefensiveBoard();
 }
 void Executive::getNumberOfShips(){
   std::cout << "Enter the number of ships(1-5): ";
