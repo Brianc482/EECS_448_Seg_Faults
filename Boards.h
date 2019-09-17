@@ -7,6 +7,8 @@
 
 #include <iostream>
 #include <string>
+#include <cstdlib>
+#include <algorithm>
 
 class Boards{
 private:
@@ -34,13 +36,34 @@ public:
 	 * @note Turns the ship char into a hit char.
 	 */
 	bool isHit(char, int);
+	/* @pre Board has ships and water.
+	 * @post Returns true if it's water, false if it's a ship.
+	 */
+	bool isPlaceable(char, int);
+	/* @pre Board has ships and water.
+	 * @post Returns true if all spaces are water in range.
+	 * @note Calls isPlaceable over a range of spaces.
+	 */
+	bool isPlaceableRange(char, char, int, int);
 	/* @pre A letter is read in for our guess.
 	 * @post Returns the numerical value of the letter.
 	 */
 	int charConvert(char);
+	/* @pre A number is used for checking.
+	 * @post Number is changed back into it's letter.
+	 */
+	char intConvert(int);
 	/* @pre Board is filled with ships and water.
 	 * @post Board is displayed to screen, but ships are hidden by water.
 	 */
 	void displayHidden() const;
+	/* @pre Board is filled with water, and maybe ships.
+	 * @post Board checks for validity on placement and places if possible.
+	 */
+	void shipCheck(int row1, int row2, char col1, char col2, int size);
+	/* @pre Board filled with water.
+	 * @post Ship piece placed at given row and col.
+	 */
+	void placeShip(int row, char col);
 };
 #endif
