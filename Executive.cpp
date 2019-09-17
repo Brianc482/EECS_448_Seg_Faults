@@ -6,7 +6,8 @@
 Executive::Executive(){
   row = numberOfShips = 0;
   column = ' ';
-  newBoard = new Boards();
+  playerOne = new Boards();
+  playerTwo = new Boards();
 }
 Executive::~Executive(){
 
@@ -17,12 +18,13 @@ void Executive::run(){
  getColumn();
  getRow();
 
- newBoard->displayOffensiveBoard();
- newBoard->displayDefensiveBoard();
- newBoard->displayBoth();
+ playerOne->displayOffensiveBoard();
+ playerOne->displayDefensiveBoard();
+ playerOne->displayBoth();
 
+ addSpace(60);
  checkShot();
- newBoard->displayDefensiveBoard();
+ playerOne->displayDefensiveBoard();
 }
 void Executive::getNumberOfShips(){
   std::cout << "Enter the number of ships(1-5): ";
@@ -61,9 +63,9 @@ void Executive::getRow(){
   }
 }
 void Executive::checkShot(){
-  if(newBoard->isValid(column, row)){
+  if(playerOne->isValid(column, row)){
     std::cout << "Is valid..\n";
-    if(newBoard->isHit(column, row)){
+    if(playerOne->isHit(column, row)){
       std::cout << "HIT!!!!\n";
     }
     else{
@@ -72,5 +74,10 @@ void Executive::checkShot(){
   }
   else{
     std::cout << "Invalid location\n";
+  }
+}
+void Executive::addSpace(int num){
+  for(int s = 0 ; s < num ; s++) {
+    std::cout<< "\n";
   }
 }
