@@ -14,8 +14,10 @@ Executive::~Executive(){
 
 }
 void Executive::run(){
-  int choice;
-  int choice2;
+  //int choice;
+  //int choice2;
+  int r1,r2,c1,c2;
+  char co1, co2;
   std::cout<<" ____        _   _   _      ____  _     _\n"<<"| __ )  __ _| |_| |_| | ___/ ___|| |__ (_)_ __\n"<<"|  _ \\ / _` | __| __| |/ _ \\___ \\| '_ \\| | '_ \\\n"<<"| |_) | (_| | |_| |_| |  __/___) | | | | | |_) |\n"<<"|____/ \\__,_|\\__|\\__|_|\\___|____/|_| |_|_| .__/\n"<<"                                        |_|\n";
 /*std::cout<<"1)Start Game\n";
   std::cout<<"2)Exit\n";
@@ -58,9 +60,15 @@ void Executive::run(){
  addSpace(60);
  checkShot();
 */
- playerOne->displayBoard();
- playerTwo->displayBoard();
-
+ /*playerOne->displayBoard();
+ getNumberOfShips();
+ for(int i = 1 ; i <= numberOfShips ; i++) {
+   std::cout<<"Please place your ship of size "<< i << '\n';
+   std::cout<<"What space does the ship start in?\n";
+   if()
+   shipCheck()
+ }
+*/
 }
 void Executive::getNumberOfShips(){
   std::cout << "Enter the number of ships(1-5): ";
