@@ -99,9 +99,13 @@ bool Boards::isHit(char column, int row){
   if(defensiveBoard[columnNumber][row] == 'S'){
     defensiveBoard[columnNumber][row] = 'H';
     return true;
-  }
+  } else if(defensiveBoard[columnNumber][row] == 'H'){
+    cout << "You've already guessed there, you forfeit your turn!\n";
+    return false;
+  } else {
+    defensiveBoard[columnNumber][row] = 'M';
+    return false;
  }
- return false;
 }
 //Displays the board, but hides the ships, so you can't cheat.
 //Same basic code as the other displays.
