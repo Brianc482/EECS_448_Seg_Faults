@@ -2,7 +2,7 @@
 #include <fstream>
 #include <stdexcept>
 #include "Executive.h"
-
+#include<stdio.h>
 Executive::Executive(){
   row = numberOfShips = 0;
   column = ' ';
@@ -13,16 +13,49 @@ Executive::~Executive(){
 
 }
 void Executive::run(){
+  int choice;
+  int choice2;
+  std::cout<<" ____        _   _   _      ____  _     _\n"<<"| __ )  __ _| |_| |_| | ___/ ___|| |__ (_)_ __\n"<<"|  _ \\ / _` | __| __| |/ _ \\___ \\| '_ \\| | '_ \\\n"<<"| |_) | (_| | |_| |_| |  __/___) | | | | | |_) |\n"<<"|____/ \\__,_|\\__|\\__|_|\\___|____/|_| |_|_| .__/\n"<<"                                        |_|\n";
+  std::cout<<"1)Start Game\n";
+  std::cout<<"2)Exit\n";
+  std::cout<<"Make Choice:\n";
+  std::cin>>choice;
+std::cout<<'\a';
+  while(choice==1){
  getNumberOfShips();
  getColumn();
  getRow();
-
- newBoard->displayOffensiveBoard();
- newBoard->displayDefensiveBoard();
- newBoard->displayBoth();
+std::cout<<"1)Display Offensive Board\n";
+std::cout<<"2)Display Defensive Board\n";
+std::cout<<"3)Display Both Players\n";
+std::cin>>choice2;
+while(choice2==1){
+  newBoard->displayOffensiveBoard();
+  std::cout<<"1)Display Offensive Board\n";
+  std::cout<<"2)Display Defensive Board\n";
+  std::cout<<"3)Display Both Players\n";
+  std::cin>>choice2;
+}
+while (choice2==2){
+  newBoard->displayDefensiveBoard();
+  std::cout<<"1)Display Offensive Board\n";
+  std::cout<<"2)Display Defensive Board\n";
+  std::cout<<"3)Display Both Players\n";
+  std::cin>>choice2;
+}
+ //newBoard->displayOffensiveBoard();
+while (choice2==3){
+   newBoard->displayBoth();
+   std::cout<<"1)Display Offensive Board\n";
+   std::cout<<"2)Display Defensive Board\n";
+   std::cout<<"3)Display Both Players\n";
+   std::cin>>choice2;
+}
+ //newBoard->displayOffensiveBoard();
+ //newBoard->displayBoth();
+}
 
  checkShot();
- newBoard->displayDefensiveBoard();
 }
 void Executive::getNumberOfShips(){
   std::cout << "Enter the number of ships(1-5): ";
@@ -74,3 +107,4 @@ void Executive::checkShot(){
     std::cout << "Invalid location\n";
   }
 }
+
