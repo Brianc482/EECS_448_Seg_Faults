@@ -45,11 +45,9 @@ int Boards::charConvert(char temp){
   return columnNumber;
 }
 bool Boards::isValid(char column, int row){
-  int columnNumber = charConver(column);  
+  int columnNumber = charConvert(column);
   if((columnNumber <= 7 && columnNumber >= 0) && (row <= 7 && row >= 0)){
-    if(defensiveBoard[columnNumber][row] == '~'){
       return true;
-    }
   }
   return false;
 }
@@ -98,9 +96,32 @@ void Boards::displayDefensiveBoard() const{
 bool Boards::isHit(char column, int row){
  int columnNumber = charConvert(column);
  if((columnNumber <= 7 && columnNumber >= 0) && (row <= 7 && row >= 0)){
-  if(defensiveBoard[columnNumber][row] == 'S'){
+  if(defensiveBoard[row][columnNumber] == 'S'){
+    defensiveBoard[row][columnNumber] = 'H';
     return true;
+  } else if(defensiveBoard[row][columnNumber] == 'H'){
+    cout << "You've already guessed there, you forfeit your turn!\n";
+  } else {
+    defensiveBoard[row][columnNumber] = 'M';
   }
  }
  return false;
+}
+//Displays the board, but hides the ships, so you can't cheat.
+//Same basic code as the other displays.
+void Boards::displayHidden() const {
+  char temp = '~';
+  cout << "  A B C D E F G H\n";
+  for(int i = 0; i < rows; i++) {
+    cout << i << " ";
+    for(int j = 0; j < 8; j++) {
+      temp = offensiveBoard[i][j];
+      if(temp == 'S') {
+        cout << '~' << " ";
+      } else {
+        cout <<  offensiveBoard[i][j] << " ";
+      }
+    }
+    cout << "\n";
+  }
 }
