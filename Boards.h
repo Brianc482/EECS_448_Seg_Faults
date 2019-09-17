@@ -10,8 +10,7 @@
 
 class Boards{
 private:
-	char offensiveBoard[8][8];
-	char defensiveBoard[8][8];
+	char myBoard[8][8];
 	int rows, cols;
 public:
 /****************************************
@@ -25,9 +24,7 @@ public:
 	/* @pre Board is kept safe in myBoard.
 	 * @post Board is displayed on screen.
 	 */
-	void displayOffensiveBoard() const;
-	void displayDefensiveBoard() const;
-	void displayBoth() const;
+	void displayBoard() const;
 	/* @pre None.
 	 * @post If the spot is valid to be attacked, true is returned
 	 */

@@ -10,8 +10,7 @@ Boards::Boards(){
     characters on the heap.*/
   for(int i = 0 ; i < rows ; i++) {
     for(int j = 0; j < cols; j++){
-      offensiveBoard[i][j] = '~';
-      defensiveBoard[i][j] = '~';
+      myBoard[i][j] = '~';
     }
   }
 }
@@ -55,38 +54,18 @@ Boards::~Boards(){
   //Deletes the allocated memory for the board.
   for(int i = 0 ; i < rows ; i++) {
     for(int j = 0 ; j < rows ; j++) {
-      offensiveBoard[i][j] = ' ';
-      defensiveBoard[i][j] = ' ';
+      myBoard[i][j] = ' ';
     }
   }
-  delete offensiveBoard;
-  delete defensiveBoard;
+  delete myBoard;
 }
-//Displays both the offensive and defensive boards for a player
-void Boards::displayBoth() const{
-  cout << "\nOffensive board: \n";
-  displayOffensiveBoard();
-  cout << "\nDefensive board: \n";
-  displayDefensiveBoard();
-}
-//Displays the current offensive board
-void Boards::displayOffensiveBoard() const{
+//Displays the board
+void Boards::displayBoard() const{
   cout << "  A B C D E F G H\n";
   for(int i = 0; i < rows; i++) {
     cout << i << " ";
     for(int j = 0; j < 8; j++) {
-      cout <<  offensiveBoard[i][j] << " ";
-    }
-    cout << "\n";
-  }
-}
-//Displays the current defensive board
-void Boards::displayDefensiveBoard() const{
-  cout << "  A B C D E F G H\n";
-  for(int i = 0; i < rows; i++) {
-    cout << i << " ";
-    for(int j = 0; j < 8; j++) {
-      cout <<  defensiveBoard[i][j] << " ";
+      cout <<  myBoard[i][j] << " ";
     }
     cout << "\n";
   }
@@ -96,13 +75,13 @@ void Boards::displayDefensiveBoard() const{
 bool Boards::isHit(char column, int row){
  int columnNumber = charConvert(column);
  if((columnNumber <= 7 && columnNumber >= 0) && (row <= 7 && row >= 0)){
-  if(defensiveBoard[row][columnNumber] == 'S'){
-    defensiveBoard[row][columnNumber] = 'H';
+  if(myBoard[row][columnNumber] == 'S'){
+    myBoard[row][columnNumber] = 'H';
     return true;
-  } else if(defensiveBoard[row][columnNumber] == 'H'){
+  } else if(myBoard[row][columnNumber] == 'H'){
     cout << "You've already guessed there, you forfeit your turn!\n";
   } else {
-    defensiveBoard[row][columnNumber] = 'M';
+    myBoard[row][columnNumber] = 'M';
   }
  }
  return false;
@@ -115,11 +94,11 @@ void Boards::displayHidden() const {
   for(int i = 0; i < rows; i++) {
     cout << i << " ";
     for(int j = 0; j < 8; j++) {
-      temp = offensiveBoard[i][j];
+      temp = myBoard[i][j];
       if(temp == 'S') {
         cout << '~' << " ";
       } else {
-        cout <<  offensiveBoard[i][j] << " ";
+        cout <<  myBoard[i][j] << " ";
       }
     }
     cout << "\n";
