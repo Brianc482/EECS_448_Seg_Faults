@@ -2,38 +2,82 @@
 #include <fstream>
 #include <stdexcept>
 #include "Executive.h"
-
-Executive::Executive(){
+#include<stdio.h>
+Executive::Executive()
+{
   row = numberOfShips = 0;
   column = ' ';
-  newBoard = new Boards();
+  playerOne = new Boards();
+  playerTwo = new Boards();
 }
-Executive::~Executive(){
+
+
+Executive::~Executive()
+{
 
 
 }
-void Executive::run(){
- getNumberOfShips();
- getColumn();
- getRow();
 
- newBoard->displayOffensiveBoard();
- newBoard->displayOffensiveBoard();
- newBoard->displayBoth();
 
- checkShot();
-}
-void Executive::getNumberOfShips(){
-  std::cout << "Enter the number of ships(1-5): ";
-  std::cin >> numberOfShips;
-  while (std::cin.fail() || numberOfShips > 5 || numberOfShips < 1){
-    std::cin.clear();
-    std::cin.ignore(INT8_MAX, '\n');
-    std::cout << "Invalid number of ships, try again.\n";
-    std::cout << "\nEnter the number of ships: ";
-    std::cin >> numberOfShips;
+void Executive::run()
+{
+  //int choice;
+  //int choice2;
+  int r1,r2,c1,c2;
+  int a;
+  char b;
+  char co1, co2;
+  std::cout<<" ____        _   _   _      ____  _     _\n"<<"| __ )  __ _| |_| |_| | ___/ ___|| |__ (_)_ __\n"<<"|  _ \\ / _` | __| __| |/ _ \\___ \\| '_ \\| | '_ \\\n"<<"| |_) | (_| | |_| |_| |  __/___) | | | | | |_) |\n"<<"|____/ \\__,_|\\__|\\__|_|\\___|____/|_| |_|_| .__/\n"<<"                                        |_|\n";
+
+  playerOne->getNumberOfShips();
+  playerOne->displayBoard();
+
+  playerTwo->getNumberOfShips();
+  playerTwo->displayBoard();
+
+  cout << "Game Begins now!" << endl;
+
+  while(!(playerOne->isGameOver()) || !(playerTwo->isGameOver()) ) //the game keep going, when isGameover() is false;
+  {
+    playerOne->displayBoard();
+    cout << "Player1 starts hitting Player2." << endl;
+    cout << "Where you wanna fire at: ";
+    cin >> a >> b;
+
+    playerTwo->checkShot(b,a);
+
+    if(playerTwo->isHit(b,a))
+    {
+      playerOne->FireHit(b,a);
+    }
+    else
+    {
+      playerOne->FireMiss(b,a);
+    }
+
+
+    cout << "Player2 starts hitting Player1." << endl;
+    cout << "Where you wanna fire at: ";
+    cin >> a >> b;
+    playerOne->checkShot(b,a);
+
+    if(playerOne->isHit(b,a))
+    {
+      playerTwo->FireHit(b,a);
+    }
+    else
+    {
+      playerTwo->FireMiss(b,a);
+    }
   }
+  cout << "Game Ends !" << endl;
 }
+
+
+
+
+
+
 void Executive::getColumn(){
   std::cout << "\nEnter the column letter: ";
   std::cin >> column;
@@ -59,17 +103,11 @@ void Executive::getRow(){
     std::cin >> row;
   }
 }
-void Executive::checkShot(){
-  if(newBoard->isValid(column, row)){
-    std::cout << "Is valid..\n";
-    if(newBoard->isHit(column, row)){
-      std::cout << "HIT!!!!\n";
-    }
-    else{
-      std::cout << "MISS!!!!\n";
-    }
-  }
-  else{
-    std::cout << "Invalid location\n";
+
+
+
+void Executive::addSpace(int num){
+  for(int s = 0 ; s < num ; s++) {
+    std::cout<< "\n";
   }
 }

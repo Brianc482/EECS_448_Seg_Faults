@@ -1,12 +1,17 @@
 #ifndef EXECUTIVE_H
 #define EXECUTIVE_H
 #include "Boards.h"
-class Executive{
+using namespace std;
+class Executive
+{
     private:
+
         int row;
         char column;
-        Boards* newBoard;
-		int numberOfShips;
+        Boards* playerOne;
+        Boards* playerTwo;
+		    int numberOfShips;
+
     public:
         /**
         *@pre none
@@ -26,9 +31,21 @@ class Executive{
         *@post returns nothing
         **/
         void run();
-        void checkShot();
-        void getNumberOfShips();
+
+        /**
+         * @pre Game has begun.
+         * @post Gets the row the user wants to attack.
+         */
         void getRow();
+        /**
+         * @pre Game has begun.
+         * @post Gets the column the user wants to attack.
+         */
         void getColumn();
+        /**
+         * @pre none
+         * @post Literally just adds like 100 new lines so that you can't cheat.
+         */
+        void addSpace(int);
 };
 #endif
