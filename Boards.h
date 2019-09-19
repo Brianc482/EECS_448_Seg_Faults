@@ -91,6 +91,7 @@ public:
 
 	void FireHit(char column, int row);
 	void FireMiss(char column, int row);
-
+ void replace(char a, int b);
+ //replce the hitted ship with another char
 };
 #endif

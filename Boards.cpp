@@ -308,6 +308,10 @@ bool Boards::isGameOver()
   return true;
 }
 
+void Boards::replace(char col,int row){
+  int column = charConvert(col);
+  myBoard[row][column] = 'X';
+}
 
 void Boards::checkShot(char X,int Y)
 {

@@ -23,12 +23,15 @@ void Executive::run()
 {
   //int choice;
   //int choice2;
-  int r1,r2,c1,c2;
+  //int r1,r2,c1,c2;
+  //bool check;
+
   int a;
   char b;
-  char co1, co2;
+  //char co1, co2;
   std::cout<<" ____        _   _   _      ____  _     _\n"<<"| __ )  __ _| |_| |_| | ___/ ___|| |__ (_)_ __\n"<<"|  _ \\ / _` | __| __| |/ _ \\___ \\| '_ \\| | '_ \\\n"<<"| |_) | (_| | |_| |_| |  __/___) | | | | | |_) |\n"<<"|____/ \\__,_|\\__|\\__|_|\\___|____/|_| |_|_| .__/\n"<<"                                        |_|\n";
-
+  std::cout<<"1)Start Game\n";
+  std::cout<<"2)Exit\n";
   playerOne->getNumberOfShips();
   playerOne->displayBoard();
 
@@ -49,12 +52,15 @@ void Executive::run()
     if(playerTwo->isHit(b,a))
     {
       playerOne->FireHit(b,a);
+      playerTwo->replace(b,a);
     }
     else
     {
       playerOne->FireMiss(b,a);
     }
-
+    if(playerTwo->isGameOver()){
+      break;
+    }
 
     cout << "Player2 starts hitting Player1." << endl;
     cout << "Where you wanna fire at: ";
@@ -64,13 +70,19 @@ void Executive::run()
     if(playerOne->isHit(b,a))
     {
       playerTwo->FireHit(b,a);
+      playerOne->replace(b,a);
     }
     else
     {
       playerTwo->FireMiss(b,a);
     }
+    if(playerOne->isGameOver()){
+      break;
+    }
+
   }
   cout << "Game Ends !" << endl;
+
 }
 
 
