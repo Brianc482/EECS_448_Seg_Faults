@@ -17,11 +17,20 @@ public:
     /****************************************
             CONSTRUCTOR/DECONSTRUCTOR
     ****************************************/
+		/**
+		 *@pre Player wants to make their boards.
+		 *@post Boards are filled with water and ready to use.
+		 */
 	Boards();
+		/**
+		 *@pre Users are done with the game.
+		 *@post Memory is freed from allocation.
+		 */
 	~Boards();
     /****************************************
                     FUNCTIONS
     ****************************************/
+
 	/*
 	 * @pre Takes two integers, one for column and one for row
 	 * @post returns a boolean value
