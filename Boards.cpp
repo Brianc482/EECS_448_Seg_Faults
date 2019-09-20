@@ -106,9 +106,15 @@ void Boards::boardShot(int column, int row){
         offensiveBoard[row][column] = 'M';
     }
 }
-void Boards::boardHit(int column, int row){
+void Boards::ownBoardHit(int column, int row){
     defensiveBoard[row][column] = 'H';
 }
-void Boards::boardMiss(int column, int row){
+void Boards::ownBoardMiss(int column, int row){
+    defensiveBoard[row][column] = 'M';
+}
+void Boards::otherBoardHit(int column, int row){
+    offensiveBoard[row][column] = 'H';
+}
+void Boards::otherBoardMiss(int column, int row){
     offensiveBoard[row][column] = 'M';
 }
