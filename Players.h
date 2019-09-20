@@ -34,8 +34,10 @@ public:
 	 ***********************************/
   bool shipsSet();
 	bool hasLost();
-	void markHits(char, int);
-	void markMisses(char, int);
+	void markMyHits(char, int);
+	void markMyMisses(char, int);
+	void markTheirHits(char, int);
+	void markTheirMisses(char, int);
 	int charConvert(char);
 };
 #endif
