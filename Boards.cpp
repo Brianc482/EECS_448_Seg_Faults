@@ -354,16 +354,16 @@ void Boards::getNumberOfShips()
 
     if(numberOfShips == 1)
     {
-      cout << "Where you want to put this ship at: ";
+      cout << "Where you want to put this ship at:(Row Number First then Col Letter) ";
       cin >> a >> b; //first ship's location 1x1
       placeShip(a,b);
     }
     else if(numberOfShips == 2)
     {
-      cout << "Where you want to put the first ship(1x1) at: ";
+      cout << "Where you want to put the first ship(1x1) at:(Row Number First then Col Letter) ";
       cin >> a >> b; //first ship's location 1x1
       placeShip(a,b);
-      cout <<"How about the second ship's location now(size:1x2): ";
+      cout <<"How about the second ship's location now(size:1x2):(Row Number First then Col Letter) ";
       cin >> c >> d;
       cin >> e >> f;
       placeShip(c,d);
@@ -371,15 +371,15 @@ void Boards::getNumberOfShips()
     }
     else if(numberOfShips == 3)
     {
-      cout << "Where you want to put the first ship(1x1) at: ";
+      cout << "Where you want to put the first ship(1x1) at:(Row Number First then Col Letter) ";
       cin >> a >> b; //first ship's location 1x1
       placeShip(a,b);
-      cout << "How about the second ship's location now(size:1x2): ";
+      cout << "How about the second ship's location now(size:1x2):(Row Number First then Col Letter) ";
       cin >> c >> d;
       cin >> e >> f;
       placeShip(c,d);
       placeShip(e,f);
-      cout << "How about the third ship's location now(size:1x3): ";
+      cout << "How about the third ship's location now(size:1x3):(Row Number First then Col Letter) ";
       cin >> a >> b;
       cin >> c >> d;
       cin >> e >> f;
@@ -389,22 +389,22 @@ void Boards::getNumberOfShips()
     }
     else if(numberOfShips == 4)
     {
-      cout << "Where you want to put the first ship(1x1) at: ";
+      cout << "Where you want to put the first ship(1x1) at:(Row Number First then Col Letter) ";
       cin >> a >> b; //first ship's location 1x1
       placeShip(a,b);
-      cout << "How about the second ship's location now(size:1x2): ";
+      cout << "How about the second ship's location now(size:1x2):(Row Number First then Col Letter) ";
       cin >> c >> d;
       cin >> e >> f;
       placeShip(c,d);
       placeShip(e,f);
-      cout << "How about the third ship's location now(size:1x3): ";
+      cout << "How about the third ship's location now(size:1x3):(Row Number First then Col Letter) ";
       cin >> a >> b;
       cin >> c >> d;
       cin >> e >> f;
       placeShip(a,b);
       placeShip(c,d);
       placeShip(e,f);
-      cout << "How about the 4th ship's location now(size:1x4): ";
+      cout << "How about the 4th ship's location now(size:1x4):(Row Number First then Col Letter) ";
       cin >> a >> b;
       cin >> c >> d;
       cin >> e >> f;
@@ -416,22 +416,22 @@ void Boards::getNumberOfShips()
     }
     else if(numberOfShips == 5)
     {
-      cout << "Where you want to put the first ship(1x1) at: ";
+      cout << "Where you want to put the first ship(1x1) at:(Row Number First then Col Letter) ";
       cin >> a >> b; //first ship's location 1x1
       placeShip(a,b);
-      cout << "How about the second ship's location now(size:1x2): ";
+      cout << "How about the second ship's location now(size:1x2):(Row Number First then Col Letter) ";
       cin >> c >> d;
       cin >> e >> f;
       placeShip(c,d);
       placeShip(e,f);
-      cout << "How about the third ship's location now(size:1x3): ";
+      cout << "How about the third ship's location now(size:1x3):(Row Number First then Col Letter) ";
       cin >> a >> b;
       cin >> c >> d;
       cin >> e >> f;
       placeShip(a,b);
       placeShip(c,d);
       placeShip(e,f);
-      cout << "How about the 4th ship's location now(size:1x4): ";
+      cout << "How about the 4th ship's location now(size:1x4):(Row Number First then Col Letter) ";
       cin >> a >> b;
       cin >> c >> d;
       cin >> e >> f;
@@ -440,7 +440,7 @@ void Boards::getNumberOfShips()
       placeShip(c,d);
       placeShip(e,f);
       placeShip(g,h);
-      cout << "How about the 5th ship's location now(size:1x5): ";
+      cout << "How about the 5th ship's location now(size:1x5):(Row Number First then Col Letter) ";
       cin >> a >> b;
       cin >> c >> d;
       cin >> e >> f;
