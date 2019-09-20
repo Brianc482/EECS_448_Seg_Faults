@@ -30,67 +30,95 @@ public:
     /****************************************
                     FUNCTIONS
     ****************************************/
-	/**
-	 *@pre none
-	 *@post none
-	 *@note Displays the offensive board for the current Player
-   */
-	void displayOffensiveBoard() const;
-	/**
-	 *@pre none
-	 *@post none
-	 *@note Displays the defensive board for the current Player
-   */
-	void displayDefensiveBoard() const;
-	/**
-	 *@pre none
-	 *@post none
-	 *@note Displays both boards for the current Player.
-	 */
-	void displayBoth() const;
-	/**
-	 *@pre Board is ready to have ships placed on it.
-	 *@post Returns true if space given is water.
-	 */
+
+	/*
+	 * @pre Takes two integers, one for column and one for row
+	 * @post returns a boolean value
+	 * @note returns true if the position indicated is '~'
+	*/
 	bool isValid(int, int);
-	/**
-	 *@pre Board has ships on it, and the game is in action.
-	 *@post Returns true if space given is a ship.
-	 */
+	/*
+	 * @pre none
+	 * @post none
+	 * @note Displays the offensive board for the current Player
+  */
+	void displayOffensiveBoard() const;
+	/*
+	 * @pre none
+	 * @post none
+	 * @note Displays the defensive board for the current Player
+	*/
+	void displayDefensiveBoard() const;
+	/*
+	 * @pre none
+	 * @post none
+	 * @note Displays both the offensive and defensive
+	 					boards for the current Player
+	*/
+	void displayBoth() const;
+	/*
+	 * @pre Takes two integers, one for column and one for row
+	 * @post returns a boolean value
+	 * @note returns true if the position indicated is 'S'
+	*/
 	bool isHit(int, int);
-	/**
-	 *@pre Ships are being placed.
-	 *@post After ship is placed, displays the board to the player.
-	 */
+	/*
+	 * @pre Takes two integers, one for column and one for row
+	 * @post none
+	 * @note Marks the array with an 'S' at the specified location
+	*/
 	void markShips(int, int);
-	/**
-	 *@brief Adds a hit to your board.
-	 */
-	void ownBoardHit(int, int);
-	/**
-	 *@brief Adds a miss to your board.
-	 */
-	void ownBoardMiss(int, int);
-	/**
-	 *@brief Adds a hit to your opponent's board.
-	 */
-	void otherBoardHit(int, int);
-	/**
-	 *@brief Adds a miss to your opponent's board.
-	 */
-	void otherBoardMiss(int, int);
-	/**
-	 *@pre Game is being played.
-	 *@post If no ships remain, game is over.
-	 */
+	/*
+	 * @pre none
+	 * @post Returns a boolean value
+	 * @note Returns true if no more 'S' exist in the defensive array
+	*/
 	bool gameWon();
-	/**
-	 *@brief Returns what character is at the given position.
-	 */
+	/*
+	 * @pre Takes two integers, one for column and one for row
+	 * @post Returns a character
+	 * @note Returns the character located at the specified location
+	*/
 	char getLocation(int, int);
-	/**
-	 *@brief Shoots your shot at the opponent's board.
-	 */
+	/*
+	 * @pre Takes two integers, one for column and one for row
+	 * @post none
+	 * @note Marks the board with either an 'H' if a ship 'S' is found
+	 * 		or an 'M' if water '~' is found
+	*/
 	void boardShot(int, int);
+	/*
+	 * @pre Takes two integers, one for column and one for row
+	 * @post none
+	 * @note When the player is shooting marks the hits,
+	 * 		on their offensive board if the shot is a hit,
+	 * 		marks the specified location with an 'M'
+	*/
+	void ownBoardHit(int, int);
+	/*
+	 * @pre Takes two integers, one for column and one for row
+	 * @post none
+	 * @note When the player is shooting marks the misses,
+	 * 		on their offensive board if the shot is a hit,
+	 * 		marks the specified location with an 'M'
+	*/
+	void ownBoardMiss(int, int);
+	/*
+	 * @pre Takes two integers, one for column and one for row
+	 * @post none
+	 * @note When the player is being shoot at marks the hits,
+	 * 		on their defensive board if the shot is a hit,
+	 * 		marks the specified location with an 'M'
+	*/
+	void otherBoardHit(int, int);
+	/*
+	 * @pre Takes two integers, one for column and one for row
+	 * @post none
+	 * @note When the player is being shoot at marks the misses,
+	 * 		on their defensive board if the shot is a miss,
+	 * 		marks the specified location with an 'M'
+	*/
+	void otherBoardMiss(int, int);
+
 };
 #endif

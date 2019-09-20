@@ -23,46 +23,70 @@ class Executive{
         **/
         ~Executive();
         /**
-        *@pre takes a string for the filename
-        *@post run determines which mode to run the program in
-        *@post returns nothing
+        *@pre none
+        *@post none
+        *@post Displays the logo for the game
+        **/
+        void displayLogo();
+        /**
+        *@pre none
+        *@post none
+        *@post Displays the menu for the game
+        **/
+        void displayMenu();
+        /**
+        *@pre none
+        *@post none
+        *@post Handles the majority of functionality within
+        *     the game. ets players name, calls the setShip
+        *     method to begin setting the ships, and handles
+        *     swapping turns for each player until the game is won
         **/
         void run();
         /**
-         *@pre Game has just been opened.
-         *@post Game starts, or program closes.
-         */
-        void displayMenu();
-        /**************************************
-         * Get/Set Functions
-         *************************************/
-        /**
-         *@brief Gets the number of ships desired from the user.
-         */
-        void getNumberOfShips();
-        /**
-         *@brief User enters the row to attack.
-         */
-        void getRow();
-        /**
-         *@brief User enters the column to attack.
-         */
-        void getColumn();
-        /**
-         *@brief User 1 sets their name.
-         */
+        *@pre none
+        *@post none
+        *@post Prompts the user for a name for player 1
+        **/
         void setPlayer1Name();
         /**
-         *@brief User 2 sets their name.
-         */
+        *@pre none
+        *@post none
+        *@post Prompts the user for a name for player 2
+        **/
         void setPlayer2Name();
         /**
-         *@brief Returns User 1's name.
-         */
+        *@pre none
+        *@post none
+        *@post Returns the name of player 1 for display purposes
+        **/
         void getP1Name();
         /**
-         *@brief Returns User 2's name.
-         */
+        *@pre none
+        *@post none
+        *@post Returns the name of player 2 for display purposes
+        **/
         void getP2Name();
+        /**
+        *@pre none
+        *@post none
+        *@post Prompts the user to enter the number of ships to be
+        *     used during gameplay. Between 1 and 5 ships are allowed
+        **/
+        void getNumberOfShips();
+        /**
+        *@pre none
+        *@post none
+        *@post Repeatedly prmpts the user for a column letter until
+        *     a valid column letter is entered
+        **/
+        void getColumn();
+        /**
+        *@pre none
+        *@post none
+        *@post Repeatedly prmpts the user for a row number until
+        *     a valid row number is entered
+        **/
+        void getRow();
 };
 #endif
