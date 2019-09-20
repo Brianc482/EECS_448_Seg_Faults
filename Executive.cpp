@@ -68,7 +68,8 @@ void Executive::run(){
 
  player1->setShips(numberOfShips);
  player2->setShips(numberOfShips);
- //Swaps between players 1 and 2, giving each a chance to "shoot" 
+ clearScreen();
+ //Swaps between players 1 and 2, giving each a chance to "shoot"
  //at the opponents board. Informs the user if their shot was a hit
  //or a miss
  if(player1->shipsSet() == true && player2->shipsSet() == true){
@@ -87,6 +88,8 @@ void Executive::run(){
             player2->markMyMisses(column, row);
             player1->markTheirMisses(column, row);
         }
+        clearScreen();
+        pressToContinue();
         player2->getBoards();
         std::cout << "\n" << player2->getID() << " it's your turn!\n";
         getColumn();
@@ -102,6 +105,8 @@ void Executive::run(){
             player1->markMyMisses(column, row);
             player2->markTheirMisses(column, row);
         }
+        clearScreen();
+        pressToContinue();
     }
     //Checks if either player has lost the game
     //If true is returned for either player, declares them the winner
@@ -190,5 +195,23 @@ void Executive::getRow(){
     std::cout << "Invalid selection, try again.\n";
     std::cout << "\nEnter the row number: ";
     std::cin >> row;
+  }
+}
+
+void Executive::clearScreen(){
+  for(int i = 0 ; i < 10 ; i++){
+    std::cout<<"\n\n\n\n\n\n\n\n\n\n";
+  }
+}
+
+void Executive::pressToContinue(){
+  char press;
+  std::cout<<"Change users, then type 'R' to continue.\n";
+  std::cin>>press;
+  press = (toupper(press));
+  while(press != 'R'){
+    std::cout<<"Invalid input. Press 'R' to continue.\n";
+    std::cin>>press;
+    press= (toupper(press));
   }
 }

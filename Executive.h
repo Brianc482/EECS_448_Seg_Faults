@@ -88,5 +88,13 @@ class Executive{
         *     a valid row number is entered
         **/
         void getRow();
+        /**
+         *@brief clears the screen.
+         */
+        void clearScreen();
+        /**
+         *@brief Let's the user see if they hit or miss, then continues.
+         */
+        void pressToContinue();
 };
 #endif
