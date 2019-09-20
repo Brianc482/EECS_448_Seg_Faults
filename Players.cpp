@@ -27,11 +27,13 @@ void Players::setShips(int number){
   for(int i = 0; i < number; i++){
     if(i == 0){
       std::cout << "\n\nThis ship is a 1 X " << i+1 << " ship.\n";
+      myBoard->displayDefensiveBoard();
       getColumn();
       getRow();
       myBoard->markShips(charConvert(column), row);
     }
     else{
+      std::cout << "\nThis ship is a 1 X " << i+1 << " ship.\n";
       std::cout << "Enter 'V' to place the ship vertically, and 'H' to place the ship horizontally: ";
       std::cin >> orientation;
       orientation = toupper(orientation);
@@ -43,10 +45,25 @@ void Players::setShips(int number){
           std::cout << orientation << "\n";
       }
       for(int j = 0; j < i+1; j++){
+          if(j == 0){
+            std::cout << "This is the first section to be placed.\n";
+          }
+          else if(j == 1){
+            std::cout << "This is the second section to be placed.\n";
+          }
+          else if(j == 2){
+            std::cout << "This is the third section to be placed.\n";
+          }
+          else if(j == 3){
+            std::cout << "This is the fourth section to be placed.\n";
+          }
+          else if(j == 4){
+            std::cout << "This is the fifth section to be placed.\n";
+          }
           row = 0;
           column = ' ';
+          myBoard->displayDefensiveBoard();
           std::cout << "\n" << this->ID << " it's your turn!\n\n";
-          std::cout << "\nThis ship is a 1 X " << i+1 << " ship.\n";
           getColumn();
           getRow();
           if(orientation == 'V'){
@@ -142,11 +159,17 @@ void Players::getRow(){
         std::cin >> row;
     }
 }
-void Players::markHits(char column, int row){
-    myBoard->boardHit(charConvert(column), row);
+void Players::markMyHits(char column, int row){
+    myBoard->ownBoardHit(charConvert(column), row);
 }
-void Players::markMisses(char column, int row){
-    myBoard->boardMiss(charConvert(column), row);
+void Players::markMyMisses(char column, int row){
+    myBoard->ownBoardMiss(charConvert(column), row);
+}
+void Players::markTheirHits(char column, int row){
+    myBoard->otherBoardHit(charConvert(column), row);
+}
+void Players::markTheirMisses(char column, int row){
+    myBoard->otherBoardMiss(charConvert(column), row);
 }
 bool Players::shipsSet(){
     return this->allSet;
