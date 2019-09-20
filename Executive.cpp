@@ -12,7 +12,7 @@ Executive::Executive(){
   player2 = new Players();
   displayMenu();
 }
-//Destructor of the Eexecutive class
+//Destructor of the Executive class
 Executive::~Executive(){
     player1->setID(" ");
     player2->setID(" ");
