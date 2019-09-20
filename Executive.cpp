@@ -1,32 +1,39 @@
 #include <iostream>
 #include <fstream>
-#include <stdexcept>
 #include <string>
-//#include <stdlib.h>
 #include "Executive.h"
 
+//Constructor of the Executive class
 Executive::Executive(){
-  std::cout << " ____        _   _   _      ____  _     _\n"
-    << "| __ )  __ _| |_| |_| | ___/ ___|| |__ (_)_ __\n"
-    << "|  _ \\ / _` | __| __| |/ _ \\___ \\| '_ \\| | '_ \\\n"
-    << "| |_) | (_| | |_| |_| |  __/___) | | | | | |_) |\n"
-    << "|____/ \\__,_|\\__|\\__|_|\\___|____/|_| |_|_| .__/\n"
-    << "                                        |_|\n";
+  displayLogo();
   row = numberOfShips = choice = 0;
   column = ' ';
   player1 = new Players();
   player2 = new Players();
   displayMenu();
 }
+//Destructor of the Eexecutive class
 Executive::~Executive(){
     player1->setID(" ");
     player2->setID(" ");
     delete player1;
     delete player2;
 }
+//Displays the logo created for the Battleship game
+void Executive::displayLogo(){
+  std::cout << " ____        _   _   _      ____  _     _\n"
+    << "| __ )  __ _| |_| |_| | ___/ ___|| |__ (_)_ __\n"
+    << "|  _ \\ / _` | __| __| |/ _ \\___ \\| '_ \\| | '_ \\\n"
+    << "| |_) | (_| | |_| |_| |  __/___) | | | | | |_) |\n"
+    << "|____/ \\__,_|\\__|\\__|_|\\___|____/|_| |_|_| .__/\n"
+    << "                                        |_|\n";
+}
+//Displays the menu that is seen when the game begins
+//The menu continues to ask for input until either a new game is started
+//of exit is choosen
 void Executive::displayMenu(){
     std::cout << "\nPlease make a selection: \n";
-    std::cout << "1. Start a 2 player game\n";
+    std::cout << "1. Start a new 2 player game\n";
     std::cout << "2. Exit\n";
     int choice = 0;
 	while (choice != 2) {
@@ -48,7 +55,11 @@ void Executive::displayMenu(){
         }
     }
 }
+//Handles processing the majority of the functionality within the game
+//Sets players name, calls the setShip method to begin setting the ships,
+//and handles swapping turns for each player until the game is won
 void Executive::run(){
+ std::cout << "Let's play some BATTLESHIP!!\n";
  setPlayer1Name();
  setPlayer2Name();
  std::cout << "\n\nGreat! Now lets decide how many ships to play with.\n";
@@ -56,9 +67,10 @@ void Executive::run(){
  getNumberOfShips();
 
  player1->setShips(numberOfShips);
- //system("CLS");
  player2->setShips(numberOfShips);
- //system("CLS");
+ //Swaps between players 1 and 2, giving each a chance to "shoot" 
+ //at the opponents board. Informs the user if their shot was a hit
+ //or a miss
  if(player1->shipsSet() == true && player2->shipsSet() == true){
     while(player1->hasLost() == false && player2->hasLost() == false){
         player1->getBoards();
@@ -91,6 +103,9 @@ void Executive::run(){
             player2->markTheirMisses(column, row);
         }
     }
+    //Checks if either player has lost the game
+    //If true is returned for either player, declares them the winner
+    //and displays their offensive and defensive boards
     if(player1->hasLost() == true || player2->hasLost() == true){
         if(player2->hasLost() == true){
             player1->markMyHits(column, row);
@@ -109,6 +124,7 @@ void Executive::run(){
     }
  }
 }
+//Prompts player 1 to enter a name to be known by
 void Executive::setPlayer1Name(){
     std::string player1Name = " ";
     std::cout << "Enter the name of Player #1: ";
@@ -116,6 +132,7 @@ void Executive::setPlayer1Name(){
     std::cout << "Welcome " << player1Name << "!\n";
     player1->setID(player1Name);
 }
+//Prompts player 1 to enter a name to be known by
 void Executive::setPlayer2Name(){
     std::string player2Name = " ";
     std::cout << "Enter the name of Player #2: ";
@@ -123,12 +140,17 @@ void Executive::setPlayer2Name(){
     std::cout << "Welcome " << player2Name << "!\n";
     player2->setID(player2Name);
 }
+//Returns player1's name
 void Executive::getP1Name(){
     std::cout << player1->getID() << "\n";
 }
+//Returns player2's name
 void Executive::getP2Name(){
     std::cout << player2->getID() << "\n";
 }
+//Prompts the user to enter how many ships to be used during the game
+//between 1 and 5 ships allowed. Prompts user until valid input is
+//establised
 void Executive::getNumberOfShips(){
   std::cout << "Enter the number of ships(1-5): ";
   std::cin >> numberOfShips;
@@ -140,6 +162,8 @@ void Executive::getNumberOfShips(){
     std::cin >> numberOfShips;
   }
 }
+//Prompts the user to enter what column is to be targeted
+//Prompts user until valid input is established
 void Executive::getColumn(){
   std::cout << "\nEnter the column letter: ";
   std::cin >> column;
@@ -155,6 +179,8 @@ void Executive::getColumn(){
    }
   }
 }
+//Prompts the user to enter what row is to be targeted
+//Prompts user until valid input is established
 void Executive::getRow(){
   std::cout << "\nEnter the row number: ";
   std::cin >> row;
