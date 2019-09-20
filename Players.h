@@ -6,6 +6,10 @@
 class Players{
 private:
 	Boards* myBoard;
+	std::string ID;
+	int row;
+	char column;
+	bool allSet;
 public:
 	/************************************
 	 * Constructor/Deconstructor
@@ -15,10 +19,25 @@ public:
 	/************************************
 	 * Get/Set Functions
 	 ***********************************/
-	Boards* getBoard() const;
-	void setBoard(Boards* newBoard);
+	void getBoards() const;
+	void getOffensiveBoard() const;
+	void getDefensiveBoard() const;
+	void getColumn();
+	void getRow();
+	void setShips(int);
+	void setID(std::string);
+	std::string getID();
+	bool getHit(char, int);
+
 	/************************************
 	 * Functions
 	 ***********************************/
+  bool shipsSet();
+	bool hasLost();
+	void markMyHits(char, int);
+	void markMyMisses(char, int);
+	void markTheirHits(char, int);
+	void markTheirMisses(char, int);
+	int charConvert(char);
 };
 #endif
