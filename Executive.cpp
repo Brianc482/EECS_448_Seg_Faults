@@ -117,6 +117,8 @@ void Executive::run(){
             std::cout << player1->getID() << " has won the game!!!\n";
             player1->getOffensiveBoard();
             player1->getDefensiveBoard();
+            player1->cleanBoard();
+            player2->cleanBoard();
             displayMenu();
         }
         else if(player1->hasLost() == true){
@@ -124,6 +126,8 @@ void Executive::run(){
             std::cout << player2->getID() << " has won the game!!!\n";
             player2->getOffensiveBoard();
             player2->getDefensiveBoard();
+            player1->cleanBoard();
+            player2->cleanBoard();
             displayMenu();
         }
     }
