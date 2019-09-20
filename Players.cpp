@@ -219,3 +219,7 @@ int Players::charConvert(char temp){
   }
   return columnNumber;
 }
+
+void Players::cleanBoard(){
+  myBoard->clearBoards();
+}

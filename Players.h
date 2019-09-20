@@ -97,5 +97,10 @@ public:
 	 *@post Character is converted into a numerical value.
 	 */
 	int charConvert(char);
+	/**
+	 *@pre Game is finished, and another is wanting to begin.
+	 *@post Board is cleaned off.
+	 */
+	void cleanBoard();
 };
 #endif
