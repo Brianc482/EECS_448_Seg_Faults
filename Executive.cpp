@@ -28,25 +28,35 @@ void Executive::run()
 
   int a;
   char b;
+  int choice;
   //char co1, co2;
   std::cout<<" ____        _   _   _      ____  _     _\n"<<"| __ )  __ _| |_| |_| | ___/ ___|| |__ (_)_ __\n"<<"|  _ \\ / _` | __| __| |/ _ \\___ \\| '_ \\| | '_ \\\n"<<"| |_) | (_| | |_| |_| |  __/___) | | | | | |_) |\n"<<"|____/ \\__,_|\\__|\\__|_|\\___|____/|_| |_|_| .__/\n"<<"                                        |_|\n";
   std::cout<<"1)Start Game\n";
   std::cout<<"2)Exit\n";
+  std::cin>>choice;
+  while(choice==1){
+  playerOne->displayBoard();
+  cout<<"playerOne place your ship\n";
   playerOne->getNumberOfShips();
   playerOne->displayBoard();
-
+  cout << string(50,'\n');
+      
+  playerTwo->displayBoard();
+  cout<<"playerTwo place your ship\n";
   playerTwo->getNumberOfShips();
   playerTwo->displayBoard();
 
   cout << "Game Begins now!" << endl;
+  cout << string(50,'\n');
 
   while(!(playerOne->isGameOver()) || !(playerTwo->isGameOver()) ) //the game keep going, when isGameover() is false;
   {
+    cout <<  "Following is playerOne's Board:\n";
     playerOne->displayBoard();
     cout << "Player1 starts hitting Player2." << endl;
-    cout << "Where you wanna fire at: ";
+    cout << "Where do you wanna fire at: ";
     cin >> a >> b;
-
+cout << string(50,'\n');
     playerTwo->checkShot(b,a);
 
     if(playerTwo->isHit(b,a))
@@ -62,9 +72,14 @@ void Executive::run()
       break;
     }
 
+
+  
+    cout << "Following is playerTwo's Board:\n";
+    playerTwo->displayBoard();
     cout << "Player2 starts hitting Player1." << endl;
-    cout << "Where you wanna fire at: ";
+    cout << "Where do you wanna fire at: ";
     cin >> a >> b;
+    cout << string(50,'\n');
     playerOne->checkShot(b,a);
 
     if(playerOne->isHit(b,a))
@@ -82,6 +97,11 @@ void Executive::run()
 
   }
   cout << "Game Ends !" << endl;
+  cout<<" Would You Like to Start over? \n";
+  std::cout<<"1)Hell YEAH\n";
+  std::cout<<"2)NO\n";
+  std::cin>>choice;
+}
 
 }
 
