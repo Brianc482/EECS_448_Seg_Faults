@@ -119,6 +119,11 @@ public:
 	 * 		marks the specified location with an 'M'
 	*/
 	void otherBoardMiss(int, int);
+	/*
+	 * @pre Game is over and users want a rematch.
+	 * @post Boards are cleaned off.
+	 */
+	void clearBoards();
 
 };
 #endif

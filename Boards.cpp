@@ -138,3 +138,12 @@ void Boards::otherBoardHit(int column, int row){
 void Boards::otherBoardMiss(int column, int row){
     offensiveBoard[row][column] = 'M';
 }
+
+void Boards::clearBoards(){
+  for(int i = 0 ; i < rows ; i++) {
+    for(int j = 0; j < cols; j++){
+      offensiveBoard[i][j] = '~';
+      defensiveBoard[i][j] = '~';
+    }
+  }
+}
