@@ -32,8 +32,10 @@ public:
 	bool isValid(int, int);
 	bool isHit(int, int);
 	void markShips(int, int);
-	void boardHit(int, int);
-	void boardMiss(int, int);
+	void ownBoardHit(int, int);
+	void ownBoardMiss(int, int);
+	void otherBoardHit(int, int);
+	void otherBoardMiss(int, int);
 	bool gameWon();
 	char getLocation(int, int);
 	void boardShot(int, int);
