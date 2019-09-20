@@ -67,11 +67,13 @@ void Executive::run(){
         getRow();
         if(player2->getHit(column, row) == true){
             std::cout << "\nHIT!!!\n";
-            player2->markHits(column, row);
+            player2->markMyHits(column, row);
+            player1->markTheirHits(column, row);
         }
         else{
             std::cout << "\nMISS!!!\n";
-            player1->markMisses(column, row);
+            player2->markMyMisses(column, row);
+            player1->markTheirMisses(column, row);
         }
         player2->getBoards();
         std::cout << "\n" << player2->getID() << " it's your turn!\n";
@@ -79,23 +81,26 @@ void Executive::run(){
         getRow();
         if(player1->getHit(column, row) == true){
             std::cout << "\nHIT!!!\n";
-            player1->markHits(column, row);
+            player1->markMyHits(column, row);
+            player2->markTheirHits(column, row);
+
         }
         else{
             std::cout << "\nMISS!!!\n";
-            player2->markMisses(column, row);
+            player1->markMyMisses(column, row);
+            player2->markTheirMisses(column, row);
         }
     }
     if(player1->hasLost() == true || player2->hasLost() == true){
         if(player2->hasLost() == true){
-            player1->markHits(column, row);
+            player1->markMyHits(column, row);
             std::cout << player1->getID() << " has won the game!!!\n";
             player1->getOffensiveBoard();
             player1->getDefensiveBoard();
             displayMenu();
         }
         else if(player1->hasLost() == true){
-            player2->markHits(column, row);
+            player2->markMyHits(column, row);
             std::cout << player2->getID() << " has won the game!!!\n";
             player2->getOffensiveBoard();
             player2->getDefensiveBoard();
