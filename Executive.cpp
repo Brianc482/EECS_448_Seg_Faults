@@ -1,113 +1,182 @@
 #include <iostream>
 #include <fstream>
-#include <stdexcept>
+#include <string>
 #include "Executive.h"
-#include<stdio.h>
-Executive::Executive()
-{
-  row = numberOfShips = 0;
+
+//Constructor of the Executive class
+Executive::Executive(){
+  displayLogo();
+  row = numberOfShips = choice = 0;
   column = ' ';
-  playerOne = new Boards();
-  playerTwo = new Boards();
+  player1 = new Players();
+  player2 = new Players();
+  displayMenu();
 }
-
-
-Executive::~Executive()
-{
-
-
+//Destructor of the Executive class
+Executive::~Executive(){
+    player1->setID(" ");
+    player2->setID(" ");
+    delete player1;
+    delete player2;
 }
-
-
-void Executive::run()
-{
-  //int choice;
-  //int choice2;
-  //int r1,r2,c1,c2;
-  //bool check;
-
-  int a;
-  char b;
-  int choice;
-  //char co1, co2;
-  std::cout<<" ____        _   _   _      ____  _     _\n"<<"| __ )  __ _| |_| |_| | ___/ ___|| |__ (_)_ __\n"<<"|  _ \\ / _` | __| __| |/ _ \\___ \\| '_ \\| | '_ \\\n"<<"| |_) | (_| | |_| |_| |  __/___) | | | | | |_) |\n"<<"|____/ \\__,_|\\__|\\__|_|\\___|____/|_| |_|_| .__/\n"<<"                                        |_|\n";
-  std::cout<<"1)Start Game\n";
-  std::cout<<"2)Exit\n";
-  std::cin>>choice;
-  while(choice==1){
-  playerOne->getNumberOfShips();
-  playerOne->displayBoard();
-
-  playerTwo->getNumberOfShips();
-  playerTwo->displayBoard();
-
-  cout << "Game Begins now!" << endl;
-  cout << string(50,'\n');
-
-  while(!(playerOne->isGameOver()) || !(playerTwo->isGameOver()) ) //the game keep going, when isGameover() is false;
-  {
-    cout <<  "Following is playerOne's Board:\n";
-    playerOne->displayBoard();
-    cout << "Player1 starts hitting Player2." << endl;
-    cout << "Where do you wanna fire at: ";
-    cin >> a >> b;
-cout << string(50,'\n');
-    playerTwo->checkShot(b,a);
-
-    if(playerTwo->isHit(b,a))
-    {
-      playerOne->FireHit(b,a);
-      playerTwo->replace(b,a);
+//Displays the logo created for the Battleship game
+void Executive::displayLogo(){
+  std::cout << " ____        _   _   _      ____  _     _\n"
+    << "| __ )  __ _| |_| |_| | ___/ ___|| |__ (_)_ __\n"
+    << "|  _ \\ / _` | __| __| |/ _ \\___ \\| '_ \\| | '_ \\\n"
+    << "| |_) | (_| | |_| |_| |  __/___) | | | | | |_) |\n"
+    << "|____/ \\__,_|\\__|\\__|_|\\___|____/|_| |_|_| .__/\n"
+    << "                                        |_|\n";
+}
+//Displays the menu that is seen when the game begins
+//The menu continues to ask for input until either a new game is started
+//of exit is choosen
+void Executive::displayMenu(){
+    std::cout << "\nPlease make a selection: \n";
+    std::cout << "1. Start a new 2 player game\n";
+    std::cout << "2. Exit\n";
+    int choice = 0;
+	while (choice != 2) {
+		std::cout << "\nEnter your choice: ";
+		std::cin >> choice;
+		while (std::cin.fail() || choice > 2 || choice < 1){
+        std::cin.clear();
+        std::cin.ignore(INT8_MAX, '\n');
+        std::cout << "Invalid selection, try again.\n";
+        std::cout << "\nEnter your choice: ";
+        std::cin >> choice;
+        }
+        if(choice == 1){
+            run();
+        }
+        else if(choice == 2){
+            std::cout << "Goodbye!\n";
+            exit(0);
+        }
     }
-    else
-    {
-      playerOne->FireMiss(b,a);
-    }
-    if(playerTwo->isGameOver()){
-      break;
-    }
+}
+//Handles processing the majority of the functionality within the game
+//Sets players name, calls the setShip method to begin setting the ships,
+//and handles swapping turns for each player until the game is won
+void Executive::run(){
+ std::cout << "Let's play some BATTLESHIP!!\n";
+ setPlayer1Name();
+ setPlayer2Name();
+ std::cout << "\n\nGreat! Now lets decide how many ships to play with.\n";
+ std::cout << "The number of ships must be at least 1 and no more than 5.\n";
+ getNumberOfShips();
 
+ player1->setShips(numberOfShips);
+ player2->setShips(numberOfShips);
+ clearScreen();
+ //Swaps between players 1 and 2, giving each a chance to "shoot"
+ //at the opponents board. Informs the user if their shot was a hit
+ //or a miss
+ if(player1->shipsSet() == true && player2->shipsSet() == true){
+    while(player1->hasLost() == false && player2->hasLost() == false){
+        player1->getBoards();
+        std::cout << "\n" << player1->getID() << " it's your turn!\n";
+        getColumn();
+        getRow();
+        if(player2->getHit(column, row) == true){
+            std::cout << "\nHIT!!!\n";
+            player2->markMyHits(column, row);
+            player1->markTheirHits(column, row);
+        }
+        else{
+            std::cout << "\nMISS!!!\n";
+            player2->markMyMisses(column, row);
+            player1->markTheirMisses(column, row);
+        }
+        clearScreen();
+        pressToContinue();
+        player2->getBoards();
+        std::cout << "\n" << player2->getID() << " it's your turn!\n";
+        getColumn();
+        getRow();
+        if(player1->getHit(column, row) == true){
+            std::cout << "\nHIT!!!\n";
+            player1->markMyHits(column, row);
+            player2->markTheirHits(column, row);
 
-  
-    cout << "Following is playerTwo's Board:\n";
-    playerTwo->displayBoard();
-    cout << "Player2 starts hitting Player1." << endl;
-    cout << "Where do you wanna fire at: ";
-    cin >> a >> b;
-    cout << string(50,'\n');
-    playerOne->checkShot(b,a);
-
-    if(playerOne->isHit(b,a))
-    {
-      playerTwo->FireHit(b,a);
-      playerOne->replace(b,a);
+        }
+        else{
+            std::cout << "\nMISS!!!\n";
+            player1->markMyMisses(column, row);
+            player2->markTheirMisses(column, row);
+        }
+        clearScreen();
+        pressToContinue();
     }
-    else
-    {
-      playerTwo->FireMiss(b,a);
+    //Checks if either player has lost the game
+    //If true is returned for either player, declares them the winner
+    //and displays their offensive and defensive boards
+    if(player1->hasLost() == true || player2->hasLost() == true){
+        if(player2->hasLost() == true){
+            player1->markMyHits(column, row);
+            std::cout << player1->getID() << " has won the game!!!\n";
+            player1->getOffensiveBoard();
+            player1->getDefensiveBoard();
+            player1->cleanBoard();
+            player2->cleanBoard();
+            displayMenu();
+        }
+        else if(player1->hasLost() == true){
+            player2->markMyHits(column, row);
+            std::cout << player2->getID() << " has won the game!!!\n";
+            player2->getOffensiveBoard();
+            player2->getDefensiveBoard();
+            player1->cleanBoard();
+            player2->cleanBoard();
+            displayMenu();
+        }
     }
-    if(playerOne->isGameOver()){
-      break;
-    }
-
+ }
+}
+//Prompts player 1 to enter a name to be known by
+void Executive::setPlayer1Name(){
+    std::string player1Name = " ";
+    std::cout << "Enter the name of Player #1: ";
+    std::cin >> player1Name;
+    std::cout << "Welcome " << player1Name << "!\n";
+    player1->setID(player1Name);
+}
+//Prompts player 2 to enter a name to be known by
+void Executive::setPlayer2Name(){
+    std::string player2Name = " ";
+    std::cout << "Enter the name of Player #2: ";
+    std::cin >> player2Name;
+    std::cout << "Welcome " << player2Name << "!\n";
+    player2->setID(player2Name);
+}
+//Returns player1's name
+void Executive::getP1Name(){
+    std::cout << player1->getID() << "\n";
+}
+//Returns player2's name
+void Executive::getP2Name(){
+    std::cout << player2->getID() << "\n";
+}
+//Prompts the user to enter how many ships to be used during the game
+//between 1 and 5 ships allowed. Prompts user until valid input is
+//establised
+void Executive::getNumberOfShips(){
+  std::cout << "Enter the number of ships(1-5): ";
+  std::cin >> numberOfShips;
+  while (std::cin.fail() || numberOfShips > 5 || numberOfShips < 1){
+    std::cin.clear();
+    std::cin.ignore(INT8_MAX, '\n');
+    std::cout << "Invalid number of ships, try again.\n";
+    std::cout << "\nEnter the number of ships: ";
+    std::cin >> numberOfShips;
   }
-  cout << "Game Ends !" << endl;
-  cout<<" Would You Like to Start over? \n";
-  std::cout<<"1)Hell YEAH\n";
-  std::cout<<"2)NO\n";
-  std::cin>>choice;
 }
-
-}
-
-
-
-
-
-
+//Prompts the user to enter what column is to be targeted
+//Prompts user until valid input is established
 void Executive::getColumn(){
   std::cout << "\nEnter the column letter: ";
   std::cin >> column;
+  column = (toupper(column));
   while(column < 65 || column > 72){
     if(column < 65 || column > 72){
     std::cout << "Invalid selection, try again\n";
@@ -119,6 +188,8 @@ void Executive::getColumn(){
    }
   }
 }
+//Prompts the user to enter what row is to be targeted
+//Prompts user until valid input is established
 void Executive::getRow(){
   std::cout << "\nEnter the row number: ";
   std::cin >> row;
@@ -130,11 +201,21 @@ void Executive::getRow(){
     std::cin >> row;
   }
 }
-
-
-
-void Executive::addSpace(int num){
-  for(int s = 0 ; s < num ; s++) {
-    std::cout<< "\n";
+//Clear Screen by Printing Empty line to avoid players can see each others' boards
+void Executive::clearScreen(){
+  for(int i = 0 ; i < 10 ; i++){
+    std::cout<<"\n\n\n\n\n\n\n\n\n\n";
+  }
+}
+//Prompts user to continue when they set their ship ready
+void Executive::pressToContinue(){
+  char press;
+  std::cout<<"Change users, then type 'R' to continue.\n";
+  std::cin>>press;
+  press = (toupper(press));
+  while(press != 'R'){
+    std::cout<<"Invalid input. Press 'R' to continue.\n";
+    std::cin>>press;
+    press= (toupper(press));
   }
 }

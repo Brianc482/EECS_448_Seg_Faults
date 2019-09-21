@@ -1,17 +1,19 @@
 #ifndef EXECUTIVE_H
 #define EXECUTIVE_H
 #include "Boards.h"
-using namespace std;
-class Executive
-{
-    private:
-
-        int row;
+#include "Players.h"
+class Executive{
+    private:     
+        ///Get the row number from user, Get the choice using in interface.
+        int row, choice;
+        ///Get the col char from user
         char column;
-        Boards* playerOne;
-        Boards* playerTwo;
-		    int numberOfShips;
-
+        ///Create an object to access to player class
+        Players* player1;
+        ///Create another object to access to player class for another player
+        Players* player2;
+        ///Get the number of ships from user
+	    int numberOfShips;
     public:
         /**
         *@pre none
@@ -26,26 +28,68 @@ class Executive
         **/
         ~Executive();
         /**
-        *@pre takes a string for the filename
-        *@post run determines which mode to run the program in
-        *@post returns nothing
+        *@pre none
+        *@post Displays the logo for the game
+        **/
+        void displayLogo();
+        /**
+        *@pre none
+        *@post Displays the menu for the game
+        **/
+        void displayMenu();
+        /**
+        *@pre none
+        *@post Handles the majority of functionality within
+        *     the game. ets players name, calls the setShip
+        *     method to begin setting the ships, and handles
+        *     swapping turns for each player until the game is won
         **/
         void run();
-
         /**
-         * @pre Game has begun.
-         * @post Gets the row the user wants to attack.
-         */
-        void getRow();
+        *@pre none
+        *@post Prompts the user for a name for player 1
+        **/
+        void setPlayer1Name();
         /**
-         * @pre Game has begun.
-         * @post Gets the column the user wants to attack.
-         */
+        *@pre none
+        *@post Prompts the user for a name for player 2
+        **/
+        void setPlayer2Name();
+        /**
+        *@pre none
+        *@post Returns the name of player 1 for display purposes
+        **/
+        void getP1Name();
+        /**
+        *@pre none
+        *@post Returns the name of player 2 for display purposes
+        **/
+        void getP2Name();
+        /**
+        *@pre none
+        *@post Prompts the user to enter the number of ships to be
+        *     used during gameplay. Between 1 and 5 ships are allowed
+        **/
+        void getNumberOfShips();
+        /**
+        *@pre none
+        *@post Repeatedly prmpts the user for a column letter until
+        *     a valid column letter is entered
+        **/
         void getColumn();
         /**
-         * @pre none
-         * @post Literally just adds like 100 new lines so that you can't cheat.
+        *@pre none
+        *@post Repeatedly prmpts the user for a row number until
+        *     a valid row number is entered
+        **/
+        void getRow();
+        /**
+         *@brief clears the screen.
          */
-        void addSpace(int);
+        void clearScreen();
+        /**
+         *@brief Let's the user see if they hit or miss, then continues.
+         */
+        void pressToContinue();
 };
 #endif

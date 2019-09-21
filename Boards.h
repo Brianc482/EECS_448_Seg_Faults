@@ -7,91 +7,126 @@
 
 #include <iostream>
 #include <string>
-#include <cstdlib>
-#include <algorithm>
-
-using namespace std;
 
 class Boards{
 private:
-	char myBoard[8][8];
+	///Creating a 2D array with size 8*8
+	char offensiveBoard[8][8];
+	///Creating a 2D array with size 8*8 for player to see their own board
+	char defensiveBoard[8][8];
+	///Get the coordinate's row and col number
 	int rows, cols;
-	int numberOfShips;
 public:
-/****************************************
-		CONSTRUCTOR/DECONSTRUCTOR
-****************************************/
+    /****************************************
+            CONSTRUCTOR/DECONSTRUCTOR
+    ****************************************/
+		/**
+		 *@pre Player wants to make their boards.
+		 *@post Boards are filled with water and ready to use.
+		 */
 	Boards();
+		/**
+		 *@pre Users are done with the game.
+		 *@post Memory is freed from allocation.
+		 */
 	~Boards();
-/****************************************
-		FUNCTIONS
-****************************************/
-	/* @pre Board is kept safe in myBoard.
-	 * @post Board is displayed on screen.
-	 */
-	void displayBoard() const;
-	/* @pre None.
-	 * @post If the spot is valid to be attacked, true is returned
-	 */
-	bool isValid(char, int);
-	/* @pre Board is filled with water and ships.
-	 * @post If guess is a ship, then return true.
-	 * @note Turns the ship char into a hit char.
-	 */
-	bool isHit(char, int);
-	/* @pre Board has ships and water.
-	 * @post Returns true if it's water, false if it's a ship.
-	 */
-	bool isPlaceable(char, int);
-	/* @pre Board has ships and water.
-	 * @post Returns true if all spaces are water in range.
-	 * @note Calls isPlaceable over a range of spaces.
-	 */
-	bool isPlaceableRange(char, char, int, int);
-	/* @pre A letter is read in for our guess.
-	 * @post Returns the numerical value of the letter.
-	 */
-	int charConvert(char);
-	/* @pre A number is used for checking.
-	 * @post Number is changed back into it's letter.
-	 */
-	char intConvert(int);
-	/* @pre Board is filled with ships and water.
-	 * @post Board is displayed to screen, but ships are hidden by water.
-	 */
-	void displayHidden() const;
-	/* @pre Board is filled with water, and maybe ships.
-	 * @post Board checks for validity on placement and places if possible.
-	 */
-	void shipCheck(int row1, int row2, char col1, char col2, int size);
-	/* @pre Board filled with water.
-	 * @post Ship piece placed at given row and col.
-	 */
-	void placeShip(int row, char col);
+    /****************************************
+                    FUNCTIONS
+    ****************************************/
 
 	/**
-	 * @pre none.
-	 * @post Number of ships desired for the game is received from user.
+	 * @pre Takes two integers, one for column and one for row
+	 * @post returns a boolean value
+	 * @note returns true if the position indicated is '~'
 	 */
-	void getNumberOfShips();
-
+	bool isValid(int, int);
 	/**
-	 * @pre none.
-	 * @post Game is over when none of ships are left.
-	 */
-	bool isGameOver();
-
-
+	 * @pre none
+	 * @post none
+	 * @note Displays the offensive board for the current Player
+     */
+	void displayOffensiveBoard() const;
 	/**
-	 * @pre Boards are filled.
-	 * @post Shot is registered as hit or miss.
+	 * @pre none
+	 * @post none
+	 * @note Displays the defensive board for the current Player
+     */
+	void displayDefensiveBoard() const;
+	/**
+	 * @pre none
+	 * @post none
+	 * @note Displays both the offensive and defensive
+	 					boards for the current Player
 	 */
-	void checkShot(char X,int Y);
+	void displayBoth() const;
+	/**
+	 * @pre Takes two integers, one for column and one for row
+	 * @post returns a boolean value
+	 * @note returns true if the position indicated is 'S'
+	 */
+	bool isHit(int, int);
+	/**
+	 * @pre Takes two integers, one for column and one for row
+	 * @post none
+	 * @note Marks the array with an 'S' at the specified location
+	 */
+	void markShips(int, int);
+	/**
+	 * @pre none
+	 * @post Returns a boolean value
+	 * @note Returns true if no more 'S' exist in the defensive array
+	 */
+	bool gameWon();
+	/**
+	 * @pre Takes two integers, one for column and one for row
+	 * @post Returns a character
+	 * @note Returns the character located at the specified location
+	 */
+	char getLocation(int, int);
+	/**
+	 * @pre Takes two integers, one for column and one for row
+	 * @post none
+	 * @note Marks the board with either an 'H' if a ship 'S' is found
+	 * 		or an 'M' if water '~' is found
+	 */
+	void boardShot(int, int);
+	/**
+	 * @pre Takes two integers, one for column and one for row
+	 * @post none
+	 * @note When the player is shooting marks the hits,
+	 * 		on their offensive board if the shot is a hit,
+	 * 		marks the specified location with an 'M'
+	 */
+	void ownBoardHit(int, int);
+	/**
+	 * @pre Takes two integers, one for column and one for row
+	 * @post none
+	 * @note When the player is shooting marks the misses,
+	 * 		on their offensive board if the shot is a hit,
+	 * 		marks the specified location with an 'M'
+	 */
+	void ownBoardMiss(int, int);
+	/**
+	 * @pre Takes two integers, one for column and one for row
+	 * @post none
+	 * @note When the player is being shoot at marks the hits,
+	 * 		on their defensive board if the shot is a hit,
+	 * 		marks the specified location with an 'M'
+	 */
+	void otherBoardHit(int, int);
+	/**
+	 * @pre Takes two integers, one for column and one for row
+	 * @post none
+	 * @note When the player is being shoot at marks the misses,
+	 * 		on their defensive board if the shot is a miss,
+	 * 		marks the specified location with an 'M'
+	 */
+	void otherBoardMiss(int, int);
+	/**
+	 * @pre Game is over and users want a rematch.
+	 * @post Boards are cleaned off.
+	 */
+	void clearBoards();
 
-
-	void FireHit(char column, int row);
-	void FireMiss(char column, int row);
- void replace(char a, int b);
- //replce the hitted ship with another char
 };
 #endif
