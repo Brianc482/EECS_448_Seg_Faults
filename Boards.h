@@ -88,6 +88,7 @@ public:
 	 * @post none
 	 * @note Marks the board with either an 'H' if a ship 'S' is found
 	 * 		or an 'M' if water '~' is found
+
 	 */
 	void boardShot(int, int);
 	/**

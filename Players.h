@@ -74,6 +74,7 @@ public:
 	/************************************
 	 * Functions
 	 ***********************************/
+
 	/**
 	 *@pre None.
 	 *@brief If all ships are set, return true.
