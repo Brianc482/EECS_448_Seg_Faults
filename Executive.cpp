@@ -141,7 +141,7 @@ void Executive::setPlayer1Name(){
     std::cout << "Welcome " << player1Name << "!\n";
     player1->setID(player1Name);
 }
-//Prompts player 1 to enter a name to be known by
+//Prompts player 2 to enter a name to be known by
 void Executive::setPlayer2Name(){
     std::string player2Name = " ";
     std::cout << "Enter the name of Player #2: ";
