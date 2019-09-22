@@ -74,6 +74,9 @@ void Executive::run(){
  //Swaps between players 1 and 2, giving each a chance to "shoot"
  //at the opponents board. Informs the user if their shot was a hit
  //or a miss
+ std::cout << "The ships are set and its time for the game to begin!\n";
+ std::cout << "Let's play some BATTLESHIP!!\n";
+
  if(player1->shipsSet() == true && player2->shipsSet() == true){
     while(player1->hasLost() == false && player2->hasLost() == false){
         player1->getBoards();
@@ -167,6 +170,7 @@ void Executive::getP2Name(){
 void Executive::getNumberOfShips(){
   std::cout << "Enter the number of ships(1-5): ";
   std::cin >> numberOfShips;
+  std::cin.clear();
   while (std::cin.fail() || numberOfShips > 5 || numberOfShips < 1){
     std::cin.clear();
     std::cin.ignore(INT8_MAX, '\n');
