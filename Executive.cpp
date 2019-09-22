@@ -18,6 +18,7 @@ Executive::~Executive(){
     player2->setID(" ");
     delete player1;
     delete player2;
+
 }
 //Displays the logo created for the Battleship game
 void Executive::displayLogo(){
@@ -55,6 +56,7 @@ void Executive::displayMenu(){
         }
     }
 }
+
 //Handles processing the majority of the functionality within the game
 //Sets players name, calls the setShip method to begin setting the ships,
 //and handles swapping turns for each player until the game is won
@@ -132,6 +134,7 @@ void Executive::run(){
         }
     }
  }
+
 }
 //Prompts player 1 to enter a name to be known by
 void Executive::setPlayer1Name(){
@@ -141,6 +144,7 @@ void Executive::setPlayer1Name(){
     std::cout << "Welcome " << player1Name << "!\n";
     player1->setID(player1Name);
 }
+
 //Prompts player 2 to enter a name to be known by
 void Executive::setPlayer2Name(){
     std::string player2Name = " ";
@@ -202,12 +206,14 @@ void Executive::getRow(){
   }
 }
 
+//Clear Screen by Printing Empty line to avoid players can see each others' boards
 void Executive::clearScreen(){
   for(int i = 0 ; i < 10 ; i++){
     std::cout<<"\n\n\n\n\n\n\n\n\n\n";
   }
 }
 
+//Prompts user to continue when they set their ship ready
 void Executive::pressToContinue(){
   char press;
   std::cout<<"Change users, then type 'R' to continue.\n";

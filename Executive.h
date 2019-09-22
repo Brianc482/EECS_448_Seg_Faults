@@ -3,12 +3,19 @@
 #include "Boards.h"
 #include "Players.h"
 class Executive{
-    private:
+
+    private:     
+        ///Get the row number from user, Get the choice using in interface.
         int row, choice;
+        ///Get the col char from user
         char column;
+        ///Create an object to access to player class
         Players* player1;
+        ///Create another object to access to player class for another player
         Players* player2;
-		      int numberOfShips;
+        ///Get the number of ships from user
+	    int numberOfShips;
+
     public:
         /**
         *@pre none
@@ -24,7 +31,6 @@ class Executive{
         ~Executive();
         /**
         *@pre none
-        *@post none
         *@post Displays the logo for the game
         **/
         void displayLogo();

@@ -5,10 +5,15 @@
 
 class Players{
 private:
+	///Creating an object to access to board class
 	Boards* myBoard;
+	///String that save player's desire name
 	std::string ID;
+	///row number for hitting ships
 	int row;
+	///col char for hitting ships
 	char column;
+	///bool that to determine whether players are ready to play
 	bool allSet;
 public:
 	/************************************
@@ -16,7 +21,7 @@ public:
 	 ***********************************/
 	 /**
 	  *@brief creates the player, which has access to their boards.
-		*/
+	  */
  	Players();
 	/**
 	 *@brief Frees up any assests the player has from memory.
@@ -26,8 +31,9 @@ public:
 	 * Get/Set Functions
 	 ***********************************/
 	 /**
+	  *@pre None.
 	  *@brief Grabs both boards to display.
-		*/
+	  */
 	void getBoards() const;
 	/**
 	 *@brief Displays the board from an offensive standpoint.
@@ -68,10 +74,12 @@ public:
 	/************************************
 	 * Functions
 	 ***********************************/
-	 /**
-	  *@brief If all ships are set, return true.
-		*/
-  bool shipsSet();
+
+	/**
+	 *@pre None.
+	 *@brief If all ships are set, return true.
+	 */
+    bool shipsSet();
 	/**
 	 *@brief If the player has no more ships, return true.
 	 */

@@ -76,10 +76,12 @@ bool Boards::isHit(int column, int row){
   if(defensiveBoard[row][column] == 'S'){
     defensiveBoard[row][column] = 'H';
     shipHit = true;
+
   }
   else{
     defensiveBoard[row][column] = 'M';
   }
+
   return shipHit;
  }
  return shipHit;
@@ -139,6 +141,7 @@ void Boards::otherBoardMiss(int column, int row){
     offensiveBoard[row][column] = 'M';
 }
 
+//Set the boards to default
 void Boards::clearBoards(){
   for(int i = 0 ; i < rows ; i++) {
     for(int j = 0; j < cols; j++){
